@@ -30,7 +30,7 @@ export const UserMenu: React.FC = () => {
   const [imageProxyUrl, setImageProxyUrl] = useState('');
   const [enableOptimization, setEnableOptimization] = useState(true);
   const [enableImageProxy, setEnableImageProxy] = useState(false);
-  const [enableDoubanProxy, setEnableDoubanProxy] = useState(false);
+  const [enableDoubanProxy, setEnableDoubanProxy] = useState(true);
 
   // 修改密码相关状态
   const [newPassword, setNewPassword] = useState('');
@@ -74,7 +74,7 @@ export const UserMenu: React.FC = () => {
         (window as any).RUNTIME_CONFIG?.DOUBAN_PROXY || '';
       if (savedEnableDoubanProxy !== null) {
         setEnableDoubanProxy(JSON.parse(savedEnableDoubanProxy));
-      } else if (defaultDoubanProxy) {
+      } else {
         setEnableDoubanProxy(true);
       }
 
@@ -268,7 +268,7 @@ export const UserMenu: React.FC = () => {
     setDefaultAggregateSearch(true);
     setEnableOptimization(true);
     setDoubanProxyUrl(defaultDoubanProxy);
-    setEnableDoubanProxy(!!defaultDoubanProxy);
+    setEnableDoubanProxy(true);
     setEnableImageProxy(!!defaultImageProxy);
     setImageProxyUrl(defaultImageProxy);
 
@@ -278,7 +278,7 @@ export const UserMenu: React.FC = () => {
       localStorage.setItem('doubanProxyUrl', defaultDoubanProxy);
       localStorage.setItem(
         'enableDoubanProxy',
-        JSON.stringify(!!defaultDoubanProxy)
+        JSON.stringify(true)
       );
       localStorage.setItem(
         'enableImageProxy',
@@ -523,7 +523,7 @@ export const UserMenu: React.FC = () => {
                 启用豆瓣代理
               </h4>
               <p className='text-xs text-gray-500 dark:text-gray-400 mt-1'>
-                启用后，豆瓣数据将通过代理服务器获取
+                开启后优先使用豆瓣代理；地址留空时使用服务器 API
               </p>
             </div>
             <label className='flex items-center cursor-pointer'>
